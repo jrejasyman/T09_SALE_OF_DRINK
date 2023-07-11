@@ -1,0 +1,80 @@
+<div ngClass="card p-1" class="table">
+    <form class="Textocard" [formGroup]="ventaForm" (ngSubmit)="guardar()">
+        <h3 ngClass="card" class="card-header" style="background-color: rgb(175, 210, 240);">REGISTRAR VENTA</h3>
+        <div>
+            <div class="form-group">
+                <label>FECHA DE VENTA</label><br>
+                <input readonly style="background-color: rgb(221, 236, 236);" placeholder="Introduce la fecha"
+                    type="text" formControlName="fecven" class="form-control">
+            </div>
+
+            <div class="form-group">
+                <label>TIPO DE PAGO</label><br>
+                <select style="background-color: rgb(221, 236, 236);" class="form-select" formControlName="tippagven">
+                    <option value="EFECTIVO">EFECTIVO</option>
+                    <option value="YAPE">YAPE</option>
+                    <option value="PLIN">PLIN</option>
+                    <option value="TARJETA">TARJETA</option>
+                </select>
+            </div>
+            <div class="form-group">
+                <label>CLIENTE</label>
+                <select style="background-color: rgb(221, 236, 236);" class="form-select" formControlName="persona"
+                    [compareWith]="compareFn">
+                    <option selected *ngFor="let persona of personas" [ngValue]="persona">
+                        {{persona.nomper}} {{persona.apeper}}
+                    </option>
+                </select>
+            </div>
+        </div>
+
+        <app-ventadetalle [detalles]="detalles" (items)="getdetalles($event)"></app-ventadetalle>
+
+        <div class="form-group">
+            <div class="card">
+                <button type="submit" class="btn btn-primary" [disabled]="ventaForm.invalid">GUARDAR</button>
+            </div>
+        </div>
+    </form>
+</div>
+
+<br>
+
+<div class="card m-1 p-1" ngClass="table">
+    <div>
+        <div class="card">
+            <h3 class="card-header" style="background-color: rgb(175, 210, 240);">VENTAS REGISTRADAS</h3>
+            <table class="table">
+                <thead>
+                    <tr>
+                        <th>ID</th>
+                        <th>FECHA DE VENTA</th>
+                        <th>CLIENTE</th>
+                        <th>TIPO DE PAGO</th>
+                        <th>ESTADO</th>
+                        <th>OPCIONES</th>
+                    </tr>
+                </thead>
+
+                <tbody>
+                    <tr *ngFor="let item of venta">
+                        <th>{{item.idven}}</th>
+                        <td>{{item.fecven}}</td>
+                        <td>{{item.persona?.nomper}} {{item.persona?.apeper}}</td>
+                        <td>{{item.tippagven}}</td>
+                        <td>{{item.estven}}</td>
+
+                        <td>
+                            <button type="submit" class="btn btn-success" aria-label="Update button"
+                                (click)="editar(item)">Editar</button>&nbsp;
+
+                            <button type="button" class="btn btn-danger" aria-label="Delete button"
+                                (click)="eliminar(item)">Eliminar</button>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>
+<br>

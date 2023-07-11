@@ -1,0 +1,93 @@
+<div class="card" ngClass="table">
+    <form [formGroup]="personaForm" (ngSubmit)="guardar()">
+
+        <h3 class="card-header" style="background-color: rgb(175, 210, 240);">REGISTRAR CLIENTE</h3>
+        <div class="Textocard" ngClass="card-body">
+            <div class="form-group">
+                <label>NOMBRE</label><br>
+                <input style="background-color: rgb(221, 236, 236);" type="text" formControlName="nomper"
+                    class="form-control" placeholder="Introduce tu nombre">
+            </div>
+
+            <div class="form-group">
+                <label>APELLIDO</label><br>
+                <input style="background-color: rgb(221, 236, 236);" type="text" formControlName="apeper"
+                    class="form-control" placeholder="Introduce tu apellido">
+            </div>
+
+            <div class="form-group">
+                <label>CELULAR</label><br>
+                <input minlength="9" maxlength="9" onkeypress='return event.charCode >= 30 && event.charCode <= 57'
+                    style="background-color: rgb(221, 236, 236);" type="text" formControlName="celper"
+                    class="form-control" placeholder="Introduce tu numero">
+            </div>
+
+            <div class="form-group">
+                <label>CORREO</label><br>
+                <input pattern="[a-zA-Z0-9_]+([.][a-zA-Z0-9_]+)*@[a-zA-Z0-9_]+([.][a-zA-Z0-9_]+)*[.][a-zA-Z]{1,5}"
+                    name="email" style="background-color: rgb(221, 236, 236);" type="email" formControlName="corper"
+                    class="form-control" required="corper" placeholder="Introduce tu Email">
+            </div>
+
+            <div class="form-group">
+                <label>DOC. IDENTIDAD</label><br>
+                <input onkeypress='return event.charCode >= 30 && event.charCode <= 57'
+                    style="background-color: rgb(221, 236, 236);" type="text" formControlName="dniper"
+                    class="form-control" placeholder="Introduce tu numero">
+            </div>
+        </div>
+
+        <div class="form-group">
+            <div class="card">
+                <button type="submit" class="btn btn-primary" [disabled]="personaForm.invalid">GUARDAR</button>
+            </div>
+        </div>
+
+    </form>
+
+</div><br>
+<div class="card m-1 p-1" ngClass="table">
+    <div>
+        <div class="card">
+            <h3 class="card-header" style="background-color: rgb(175, 210, 240);">LISTA DE CLIENTES REGITRADOS</h3>
+
+            <table class="table">
+
+                <thead>
+                    <tr>
+                        <th>ID</th>
+                        <th>NOMBRE</th>
+                        <th>APELLIDO</th>
+                        <th>CELULAR</th>
+                        <th>CORREO</th>
+                        <th>DOC. IDENTIDAD</th>
+                        <th>ESTADO</th>
+                        <th>OPCIONES</th>
+
+                    </tr>
+                </thead>
+
+                <tbody>
+                    <tr *ngFor="let item of persona">
+                        <th>{{item.idper}}</th>
+                        <td>{{item.nomper}}</td>
+                        <td>{{item.apeper}}</td>
+                        <td>{{item.celper}}</td>
+                        <td>{{item.corper}}</td>
+                        <td>{{item.dniper}}</td>
+                        <td>{{item.estper}}</td>
+                        <td>
+
+                            <button type="submit" class="btn btn-success" aria-label="Update button"
+                                (click)="editar(item)">Editar</button>&nbsp;
+
+                            <button type="button" class="btn btn-danger" aria-label="Delete button"
+                                (click)="eliminar(item)">Eliminar</button>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>
+<br>

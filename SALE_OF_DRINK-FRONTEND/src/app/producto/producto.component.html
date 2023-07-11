@@ -1,0 +1,74 @@
+<div class="card" ngClass="table">
+    <form [formGroup]="productoForm" (ngSubmit)="guardar()">
+        <h3 class="card-header" style="background-color: rgb(175, 210, 240);">REGISTRAR PRODUCTO</h3>
+
+        <div class="Textocard" ngClass="card-body">
+            <div class="form-group">
+                <label>NOMBRE DEL PRODUCTO</label><br>
+                <input style="background-color: rgb(221, 236, 236);" type="text" formControlName="nompro"
+                    class="form-control" placeholder="Introduce el nombre">
+            </div>
+
+            <div class="form-group">
+                <label>CANTIDAD DEL PRODUCTO</label><br>
+                <input onkeypress='return event.charCode >= 30 && event.charCode <= 57'
+                    style="background-color: rgb(221, 236, 236);" type="text" formControlName="canpro"
+                    class="form-control" placeholder="Introduce la cantidad">
+            </div>
+
+            <div class="form-group">
+                <label>PRECIO * UNIDAD</label><br>
+                <input onkeypress='return event.charCode >= 30 && event.charCode <= 57'
+                    style="background-color: rgb(221, 236, 236);" type="decimal" formControlName="precpro"
+                    class="form-control" placeholder="Introduce el precio">
+            </div>
+        </div>
+
+        <div class="form-group">
+            <div class="card">
+                <button type="submit" class="btn btn-primary" [disabled]="productoForm.invalid">GUARDAR</button>
+            </div>
+        </div>
+    </form>
+</div>
+<br>
+<div class="card m-1 p-1" ngClass="table">
+    <div>
+        <div class="card">
+            <h4 class="card-header" style="background-color: rgb(175, 210, 240);">PRODUCTOS REGISTRADAS</h4>
+
+            <table class="table">
+
+                <thead>
+                    <tr>
+                        <th>ID</th>
+                        <th>NOMBRE</th>
+                        <th>CANTIDAD</th>
+                        <th>PRECIO * UNIDAD</th>
+                        <th>ESTADO</th>
+                        <th>OPCIONES</th>
+                    </tr>
+                </thead>
+
+                <tbody>
+                    <tr *ngFor="let item of producto">
+                        <th>{{item.idpro}}</th>
+                        <td>{{item.nompro}}</td>
+                        <td>{{item.canpro}}</td>
+                        <td>S/.&nbsp;&nbsp;&nbsp;{{item.precpro}}</td>
+                        <td>{{item.estpro}}</td>
+
+                        <td>
+                            <button type="submit" class="btn btn-success" aria-label="Update button"
+                                (click)="editar(item)">Editar</button>&nbsp;
+
+                            <button type="button" class="btn btn-danger" aria-label="Delete button"
+                                (click)="eliminar(item)">Eliminar</button>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>
+<br>

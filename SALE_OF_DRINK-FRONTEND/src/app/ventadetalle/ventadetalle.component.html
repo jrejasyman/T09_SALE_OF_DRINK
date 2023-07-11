@@ -1,0 +1,60 @@
+<div class="card m-4 p-4">
+    <form class="Textocard" [formGroup]="ventadetalleForm" (ngSubmit)="agregartemporal()">
+
+        <div class="form-group">
+            <td>
+                <label>PRODUCTO</label><br>
+            </td>
+            <select style="background-color: rgb(221, 236, 236);" class="form-select" formControlName="producto"
+                [compareWith]="compareFn">
+                <option selected *ngFor="let producto of productos" [ngValue]="producto">
+                    {{producto.nompro}} - S/.{{producto.precpro}}
+                </option>
+            </select>
+        </div>
+        <br>
+        <div class="form-group">
+            <label>CANTIDAD</label><br>
+            <input onkeypress='return event.charCode >= 30 && event.charCode <= 57'
+                style="background-color: rgb(221, 236, 236);" type="text" formControlName="canvendet"
+                class="form-control" placeholder="Introduce la cantidad a pedir">
+        </div>
+        <br>
+
+        <button class="btn btn-outline-info pt-2" type="submit">Agregar al pedido</button>
+    </form>
+    <div class="pt-3">
+        <div class="card">
+            <h5 class="card-header" style="background-color: rgb(175, 210, 240);">TOMADO DE PEDIDO</h5>
+            <table class="table">
+                <thead>
+                    <tr>
+                        <th>Nombre</th>
+                        <th>Cantidad</th>
+                        <th>Precio</th>
+                        <th>OPCIONES</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr *ngFor="let detalle of detalles; let i = index">
+                        <td>
+                            {{detalle.producto.nompro}}
+                        </td>
+                        <td>
+                            {{detalle.canvendet}}
+                        </td>
+                        <td>
+                            S/.&nbsp;&nbsp;&nbsp;{{detalle.prevendet}}
+                        </td>
+                        <td>
+                            <button class="btn btn-outline-danger" (click)="eliminarTemporal(i)">
+                                Eliminar
+                            </button>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+
+    </div>
+</div>
